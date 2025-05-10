@@ -2,19 +2,11 @@
 
 Aplikasi Todo List modern yang dibangun menggunakan Laravel untuk frontend dan Golang untuk backend API. Aplikasi ini memungkinkan pengguna untuk mengelola tugas-tugas mereka dengan antarmuka yang intuitif dan performa yang cepat.
 
-## ✨ Fitur
-
-- ✅ Membuat, membaca, memperbarui, dan menghapus tugas (CRUD)
-- 🔄 Status tugas (Aktif/Selesai)
-- 🎨 Antarmuka pengguna yang modern dan responsif
-- ⚡ Backend API yang cepat dengan Golang
-- 🔒 Arsitektur microservice yang aman
-
 ## 🛠️ Teknologi yang Digunakan
 
 ### Frontend
 
-- Laravel 10.x
+- Laravel 11
 - Tailwind CSS
 - Blade Template Engine
 - JavaScript
