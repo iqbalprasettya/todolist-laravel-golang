@@ -1,0 +1,47 @@
+version: "3.8"
+
+services:
+  golang-api:
+    build: ./todo-api
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_USER: postgres
+      DB_PASSWORD: secret
+      DB_NAME: todo_db
+      DB_PORT: 5432
+
+  laravel:
+    build:
+      context: ./todo-frontend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./todo-frontend:/var/www/html
+      - /var/www/html/node_modules
+      - /var/www/html/public/build
+    depends_on:
+      - golang-api
+    environment:
+      APP_ENV: local
+      APP_KEY: "base64:5zgi9WPrZzt8MbgL/1tSjgqKER8eR3892T01160cpeQ="
+      DB_CONNECTION: mysql
+      VITE_APP_URL: "http://localhost:8000"
+    command: php artisan serve --host=0.0.0.0 --port=8000
+
+  db:
+    image: postgres:13
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: todo_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: secret
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+volumes:
+  pg_data:
